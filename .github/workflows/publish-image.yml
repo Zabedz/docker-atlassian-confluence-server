@@ -48,7 +48,7 @@ jobs:
       - name: Query Docker Hub
         id: search
         run: |
-          if curl --silent -f -lSL https://hub.docker.com/v2/repositories/arsm100/confluence-m1/tags/${{ needs.get-version.outputs.version }}; then
+          if curl --silent -f -lSL https://hub.docker.com/v2/repositories/zabedz/confluence-arm/tags/${{ needs.get-version.outputs.version }}; then
             echo "exists=true" >> $GITHUB_OUTPUT
             echo "Image already exists on Docker Hub. Skipping build..."
           else
@@ -85,7 +85,7 @@ jobs:
           push: true
           build-args: |
             CONFLUENCE_VERSION=${{ needs.get-version.outputs.version }}
-          tags: arsm100/confluence-m1:${{ needs.get-version.outputs.version }}${{ (github.event.inputs.latest == 'true' || github.event.schedule == '57 20 * * 1-5') && ',arsm100/confluence-m1:latest' || ''}}
+          tags: zabedz/confluence-arm:${{ needs.get-version.outputs.version }}${{ (github.event.inputs.latest == 'true' || github.event.schedule == '57 20 * * 1-5') && ',zabedz/confluence-arm:latest' || ''}}
           platforms: linux/arm64/v8
           cache-from: type=gha
           cache-to: type=gha
